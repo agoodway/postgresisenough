@@ -44,8 +44,8 @@ const toolCount = tools.length;
         <SearchInput placeholder="Search tools, problems, or what you're replacing..." />
 
         <!-- Type Toggle -->
-        <div class="flex items-center gap-4 pb-4 border-b border-gray-200">
-          <span class="text-sm font-medium text-text">Type:</span>
+        <div class="flex flex-wrap items-center gap-2 sm:gap-4 pb-4 border-b border-gray-200">
+          <span class="hidden sm:inline text-sm font-medium text-text">Type:</span>
           <div class="flex gap-2" role="group" aria-label="Filter by tool type">
             <button
               type="button"
@@ -72,8 +72,8 @@ const toolCount = tools.length;
         </div>
 
         <!-- Category Filter -->
-        <div class="flex items-center gap-4">
-          <span class="text-sm font-medium text-text">Category:</span>
+        <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+          <span class="hidden sm:inline text-sm font-medium text-text">Category:</span>
           <CategoryFilter />
         </div>
       </div>
