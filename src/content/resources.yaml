@@ -117,9 +117,10 @@
 
 # Talks
 - id: postgres-vision-2024
-  title: "PostgreSQL: The Next 20 Years"
-  url: https://www.youtube.com/watch?v=gEcN0NzNChw
-  description: Core team members discuss where Postgres is headed and the extension ecosystem.
+  title: "Postgres Over the Horizon: The Future We Should Be Building"
+  url: https://www.youtube.com/watch?v=CIwAkwkQNUo
+  author: Peter Eisentraut
+  description: Core team member outlines the next 5-10 years of PostgreSQL, focusing on AI, analytics, and the extension ecosystem.
   type: talk
   year: 2024
 
