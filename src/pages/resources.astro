@@ -9,20 +9,19 @@ const resources = await getCollection('resources');
 
 const featured = resources.filter((r) => r.data.featured);
 const articles = resources.filter((r) => r.data.type === 'article' && !r.data.featured);
-const talks = resources.filter((r) => r.data.type === 'talk');
 const books = resources.filter((r) => r.data.type === 'book');
 ---
 
 <BaseLayout
   title="Resources"
-  description="Essential reading on the 'Postgres is enough' philosophy. Articles, talks, and books on choosing boring technology and simplifying your stack."
+  description="Essential reading on the 'Postgres is enough' philosophy. Articles and books on choosing boring technology and simplifying your stack."
 >
   <Fragment slot="head">
     <Schema
       item={{
         '@type': 'CollectionPage',
         name: 'Postgres Philosophy Resources',
-        description: 'Curated articles, talks, and books on using PostgreSQL for everything.',
+        description: 'Curated articles and books on using PostgreSQL for everything.',
         url: `${Astro.site?.href}resources`,
       }}
     />
@@ -36,7 +35,7 @@ const books = resources.filter((r) => r.data.type === 'book');
           Resources
         </h1>
         <p class="text-text-muted max-w-2xl mx-auto">
-          The essays, talks, and books that shaped the "Postgres Is Enough" philosophy.
+          The essays and books that shaped the "Postgres Is Enough" philosophy.
           Start with the featured pieces, then explore deeper.
         </p>
       </div>
@@ -74,27 +73,6 @@ const books = resources.filter((r) => r.data.type === 'book');
           </h2>
           <div class="space-y-3">
             {articles.map((resource) => (
-              <ResourceCard
-                title={resource.data.title}
-                url={resource.data.url}
-                author={resource.data.author}
-                description={resource.data.description}
-                type={resource.data.type}
-                year={resource.data.year}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <!-- Talks -->
-      {talks.length > 0 && (
-        <section class="mb-12">
-          <h2 class="font-display text-xl font-bold text-text mb-4">
-            Talks
-          </h2>
-          <div class="space-y-3">
-            {talks.map((resource) => (
               <ResourceCard
                 title={resource.data.title}
                 url={resource.data.url}

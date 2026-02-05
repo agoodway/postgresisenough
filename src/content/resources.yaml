@@ -85,13 +85,6 @@
   type: article
   year: 2025
 
-- id: boring-technology-club
-  title: Boring Technology Club
-  url: https://boringtechnology.club
-  author: Dan McKinley
-  description: The slide deck version of "Choose Boring Technology" with additional commentary.
-  type: talk
-
 # Books
 - id: postgres-14-internals
   title: PostgreSQL 14 Internals
@@ -115,17 +108,3 @@
   type: book
   year: 2025
 
-# Talks
-- id: postgres-vision-2024
-  title: "Postgres Over the Horizon: The Future We Should Be Building"
-  url: https://www.youtube.com/watch?v=CIwAkwkQNUo
-  author: Peter Eisentraut
-  description: Core team member outlines the next 5-10 years of PostgreSQL, focusing on AI, analytics, and the extension ecosystem.
-  type: talk
-  year: 2024
-
-- id: scaling-postgres-instagram
-  title: Scaling Instagram's Postgres
-  url: https://www.youtube.com/watch?v=hnpzNAPiC0E
-  description: How Instagram ran on Postgres at massive scale before the Facebook acquisition.
-  type: talk
