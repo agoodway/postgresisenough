@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Postgres blue + warm accent */
+  --color-pg-blue: #336791;
+  --color-pg-blue-dark: #264d6d;
+  --color-pg-blue-light: #4a7da8;
+  --color-accent: #ff6b35;
+  --color-accent-dark: #e55a2b;
+  --color-bg: #fafafa;
+  --color-bg-alt: #f0f0f0;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-pg-blue);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-pg-blue);
+  color: white;
+}

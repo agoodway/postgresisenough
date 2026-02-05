@@ -1,0 +1,722 @@
+# Message Queues & Background Jobs
+- id: pgmq
+  name: PGMQ
+  description: A lightweight message queue built on Postgres with at-least-once delivery and visibility timeout
+  problem: Need a simple, durable message queue?
+  category: queues
+  url: https://github.com/tembo-io/pgmq
+  replaces: [Redis, SQS, RabbitMQ]
+  toolType: extension
+
+- id: pgflow
+  name: pgflow
+  description: Workflow orchestration engine for Supabase built on pgmq with automatic retries and parallelism
+  problem: Need multi-step workflows with retries?
+  category: queues
+  url: https://pgflow.dev
+  repo: https://github.com/pgflow-dev/pgflow
+  replaces: [Temporal, Inngest, n8n]
+  toolType: software
+
+- id: graphile-worker
+  name: Graphile Worker
+  description: High-performance job queue for Node.js using PostgreSQL SKIP LOCKED
+  problem: Need reliable background job processing?
+  category: queues
+  url: https://github.com/graphile/worker
+  replaces: [Sidekiq, Bull, Celery]
+  toolType: software
+
+- id: pg-boss
+  name: pg-boss
+  description: Job queue for Node.js built on PostgreSQL with exponential backoff and scheduling
+  problem: Need job scheduling with retries?
+  category: queues
+  url: https://github.com/timgit/pg-boss
+  replaces: [Agenda, Bull]
+  toolType: software
+
+- id: pg-cron
+  name: pg_cron
+  description: Run periodic jobs inside PostgreSQL using cron syntax
+  problem: Need scheduled database maintenance or jobs?
+  category: queues
+  url: https://github.com/citusdata/pg_cron
+  toolType: extension
+
+- id: pg-timetable
+  name: pg_timetable
+  description: Advanced job scheduler with chaining, conditions, and remote execution
+  problem: Need complex job workflows?
+  category: queues
+  url: https://github.com/cybertec-postgresql/pg_timetable
+  toolType: software
+
+- id: river
+  name: River
+  description: Fast, reliable background jobs for Go using Postgres SKIP LOCKED
+  problem: Need background jobs in Go?
+  category: queues
+  url: https://github.com/riverqueue/river
+  replaces: [Sidekiq, Celery]
+  toolType: software
+
+- id: oban
+  name: Oban
+  description: Robust job processing for Elixir using Postgres
+  problem: Need background jobs in Elixir?
+  category: queues
+  url: https://github.com/sorentwo/oban
+  replaces: [Sidekiq, Celery]
+  toolType: software
+
+# Full-Text Search
+- id: paradedb
+  name: ParadeDB
+  description: Postgres-native search and analytics with BM25 scoring
+  problem: Need Elasticsearch-grade full-text search?
+  category: search
+  url: https://github.com/paradedb/paradedb
+  replaces: [Elasticsearch, Solr]
+  toolType: software
+
+- id: pgroonga
+  name: PGroonga
+  description: Full-text search extension supporting all languages with fast index updates
+  problem: Need multilingual full-text search?
+  category: search
+  url: https://github.com/pgroonga/pgroonga
+  replaces: [Elasticsearch]
+  toolType: extension
+
+- id: pg-search
+  name: pg_search
+  description: Postgres extension for BM25 full-text search from ParadeDB
+  problem: Need modern full-text ranking?
+  category: search
+  url: https://github.com/paradedb/paradedb/tree/dev/pg_search
+  replaces: [Elasticsearch]
+  toolType: extension
+
+- id: zombodb
+  name: ZomboDB
+  description: Bridge between Postgres and Elasticsearch for hybrid queries
+  problem: Need to query Elasticsearch from SQL?
+  category: search
+  url: https://github.com/zombodb/zombodb
+  toolType: extension
+
+# Vector / AI Search
+- id: pgvector
+  name: pgvector
+  description: Open-source vector similarity search for Postgres
+  problem: Need vector embeddings for AI/RAG?
+  category: vectors
+  url: https://github.com/pgvector/pgvector
+  replaces: [Pinecone, Milvus, Qdrant, Weaviate]
+  toolType: extension
+
+- id: pgvectorscale
+  name: pgvectorscale
+  description: Faster vector search with StreamingDiskANN index from Timescale
+  problem: Need high-performance vector search at scale?
+  category: vectors
+  url: https://github.com/timescale/pgvectorscale
+  replaces: [Pinecone]
+  toolType: extension
+
+- id: lantern
+  name: Lantern
+  description: Vector database extension with HNSW indexing
+  problem: Need fast approximate nearest neighbor search?
+  category: vectors
+  url: https://github.com/lanterndata/lantern
+  replaces: [Pinecone, Milvus]
+  toolType: extension
+
+- id: pgai
+  name: pgai
+  description: AI workflows directly in Postgres - embeddings, LLM calls, RAG
+  problem: Need to run AI pipelines in the database?
+  category: vectors
+  url: https://github.com/timescale/pgai
+  toolType: extension
+
+- id: postgresml
+  name: PostgresML
+  description: ML and AI workflows directly in Postgres with GPU acceleration
+  problem: Need to run ML models in the database?
+  category: vectors
+  url: https://github.com/postgresml/postgresml
+  replaces: [External ML services]
+  toolType: extension
+
+# Time-Series
+- id: timescaledb
+  name: TimescaleDB
+  description: Time-series database built on PostgreSQL with automatic partitioning
+  problem: Need to store and query time-series data?
+  category: time-series
+  url: https://github.com/timescale/timescaledb
+  replaces: [InfluxDB, Prometheus, QuestDB]
+  toolType: extension
+
+- id: pg-partman
+  name: pg_partman
+  description: Automatic table partitioning management
+  problem: Need to manage time-based partitions?
+  category: time-series
+  url: https://github.com/pgpartman/pg_partman
+  toolType: extension
+
+# Caching
+- id: readyset
+  name: ReadySet
+  description: SQL caching engine that sits between your app and Postgres
+  problem: Need to cache query results automatically?
+  category: caching
+  url: https://github.com/readysettech/readyset
+  replaces: [Redis, Memcached]
+  toolType: software
+
+- id: pg-ivm
+  name: pg_ivm
+  description: Incrementally maintained materialized views
+  problem: Need materialized views that update incrementally?
+  category: caching
+  url: https://github.com/sraoss/pg_ivm
+  toolType: extension
+
+# Document / NoSQL
+- id: ferretdb
+  name: FerretDB
+  description: MongoDB wire protocol compatible layer on top of Postgres
+  problem: Need MongoDB compatibility with Postgres storage?
+  category: documents
+  url: https://github.com/FerretDB/FerretDB
+  replaces: [MongoDB]
+  toolType: software
+
+- id: pongo
+  name: Pongo
+  description: MongoDB-like API for Postgres using JSONB
+  problem: Need a document-oriented interface?
+  category: documents
+  url: https://github.com/event-driven-io/Pongo
+  replaces: [MongoDB]
+  toolType: software
+
+- id: dox
+  name: Dox
+  description: Document database API for PostgreSQL
+  problem: Need simple document storage?
+  category: documents
+  url: https://github.com/robconery/dox
+  toolType: software
+
+- id: documentdb
+  name: DocumentDB
+  description: MongoDB-compatible document database built on PostgreSQL
+  problem: Need MongoDB API with Postgres reliability?
+  category: documents
+  url: https://github.com/documentdb/documentdb
+  replaces: [MongoDB]
+  toolType: software
+
+- id: marten
+  name: Marten
+  description: .NET document database and event store on PostgreSQL
+  problem: Need document storage for .NET apps?
+  category: documents
+  url: https://github.com/JasperFx/marten
+  replaces: [MongoDB, RavenDB]
+  toolType: software
+
+# Graph
+- id: apache-age
+  name: Apache AGE
+  description: Graph database extension with openCypher query support
+  problem: Need graph queries and relationships?
+  category: graphs
+  url: https://github.com/apache/age
+  replaces: [Neo4j, Neptune]
+  toolType: extension
+
+- id: gel
+  name: Gel (formerly EdgeDB)
+  description: Graph-relational database built on Postgres with declarative schema and EdgeQL
+  problem: Need a modern query language for complex data?
+  category: graphs
+  url: https://github.com/geldata/gel
+  replaces: [Neo4j]
+  toolType: software
+
+# Geospatial
+- id: postgis
+  name: PostGIS
+  description: Geographic objects and spatial queries for PostgreSQL
+  problem: Need location-based queries and maps?
+  category: geo
+  url: https://github.com/postgis/postgis
+  replaces: [MongoDB geospatial, Elasticsearch geo]
+  toolType: extension
+
+- id: pgrouting
+  name: pgRouting
+  description: Routing and graph analysis extension for PostGIS
+  problem: Need shortest path or routing algorithms?
+  category: geo
+  url: https://github.com/pgRouting/pgrouting
+  toolType: extension
+
+- id: h3-pg
+  name: h3-pg
+  description: H3 hexagonal hierarchical spatial index for Postgres
+  problem: Need efficient geospatial indexing?
+  category: geo
+  url: https://github.com/zachasme/h3-pg
+  toolType: extension
+
+# Analytics / OLAP
+- id: pg-analytics
+  name: pg_analytics
+  description: Accelerated analytics with columnar storage and vectorized execution
+  problem: Need fast analytics on large datasets?
+  category: analytics
+  url: https://github.com/paradedb/pg_analytics
+  replaces: [ClickHouse, Snowflake]
+  toolType: extension
+
+- id: hydra
+  name: Hydra
+  description: Column-oriented Postgres for analytics workloads
+  problem: Need OLAP performance with Postgres compatibility?
+  category: analytics
+  url: https://github.com/hydradatabase/hydra
+  replaces: [ClickHouse]
+  toolType: software
+
+- id: citus
+  name: Citus
+  description: Distributed Postgres for multi-tenant and real-time analytics
+  problem: Need horizontal scaling for analytics?
+  category: analytics
+  url: https://github.com/citusdata/citus
+  replaces: [Distributed databases]
+  toolType: extension
+
+- id: duckdb-fdw
+  name: duckdb_fdw
+  description: Query DuckDB from Postgres via foreign data wrapper
+  problem: Need to query analytical files from Postgres?
+  category: analytics
+  url: https://github.com/alitrack/duckdb_fdw
+  toolType: extension
+
+- id: pg-lake
+  name: pg_lake
+  description: Query Iceberg tables and data lakes directly from Postgres
+  problem: Need to access data lake files from SQL?
+  category: analytics
+  url: https://github.com/Snowflake-Labs/pg_lake
+  replaces: [Iceberg clients, Data lake tools]
+  toolType: extension
+
+- id: evidence
+  name: Evidence
+  description: Build reports and dashboards with SQL and markdown
+  problem: Need BI dashboards from SQL?
+  category: analytics
+  url: https://github.com/evidence-dev/evidence
+  replaces: [Tableau, Looker]
+  toolType: software
+
+- id: metabase
+  name: Metabase
+  description: Open source business intelligence and analytics
+  problem: Need self-service analytics for your team?
+  category: analytics
+  url: https://github.com/metabase/metabase
+  replaces: [Tableau, Looker]
+  toolType: software
+
+# Change Data Capture / Streaming
+- id: walex
+  name: WalEx
+  description: Elixir library for listening to Postgres write-ahead log changes via logical replication
+  problem: Need real-time database events in Elixir?
+  category: cdc
+  url: https://github.com/cpursley/walex
+  toolType: software
+
+- id: debezium
+  name: Debezium
+  description: Stream database changes to Kafka and other systems
+  problem: Need real-time data synchronization?
+  category: cdc
+  url: https://github.com/debezium/debezium
+  replaces: [Custom CDC solutions]
+  toolType: software
+
+- id: peerdb
+  name: PeerDB
+  description: Fast Postgres replication to data warehouses
+  problem: Need to sync Postgres to Snowflake/BigQuery?
+  category: cdc
+  url: https://github.com/PeerDB-io/peerdb
+  toolType: software
+
+- id: pg-logical
+  name: pglogical
+  description: Logical replication for selective table sync
+  problem: Need to replicate specific tables?
+  category: cdc
+  url: https://github.com/2ndQuadrant/pglogical
+  toolType: extension
+
+- id: wal2json
+  name: wal2json
+  description: JSON output plugin for logical decoding
+  problem: Need CDC events as JSON?
+  category: cdc
+  url: https://github.com/eulerto/wal2json
+  toolType: extension
+
+- id: electric
+  name: ElectricSQL
+  description: Local-first sync for Postgres with real-time replication
+  problem: Need offline sync and local-first architecture?
+  category: cdc
+  url: https://github.com/electric-sql/electric
+  toolType: software
+
+# API Generation
+- id: postgrest
+  name: PostgREST
+  description: Instant RESTful API from your PostgreSQL schema
+  problem: Need a REST API without backend code?
+  category: api
+  url: https://github.com/PostgREST/postgrest
+  toolType: software
+
+- id: hasura
+  name: Hasura
+  description: Instant GraphQL and REST APIs on Postgres
+  problem: Need GraphQL without writing resolvers?
+  category: api
+  url: https://github.com/hasura/graphql-engine
+  toolType: software
+
+- id: postgraphile
+  name: PostGraphile
+  description: Highly customizable GraphQL API from Postgres schema
+  problem: Need flexible GraphQL with smart comments?
+  category: api
+  url: https://github.com/graphile/postgraphile
+  toolType: software
+
+- id: pg-graphql
+  name: pg_graphql
+  description: Native GraphQL support inside PostgreSQL
+  problem: Need GraphQL queries directly in SQL?
+  category: api
+  url: https://github.com/supabase/pg_graphql
+  toolType: extension
+
+- id: supabase
+  name: Supabase
+  description: Open source Firebase alternative with Postgres, Auth, and APIs
+  problem: Need a complete backend platform?
+  category: api
+  url: https://github.com/supabase/supabase
+  toolType: software
+
+- id: sqlpage
+  name: SQLPage
+  description: Build web applications entirely in SQL with built-in components
+  problem: Need a web UI without backend code?
+  category: ui
+  url: https://github.com/lovasoa/SQLpage
+  toolType: software
+
+- id: omnigres
+  name: Omnigres
+  description: Turn Postgres into a complete application platform with web server
+  problem: Need to run your entire app in Postgres?
+  category: api
+  url: https://github.com/omnigres/omnigres
+  toolType: extension
+
+- id: pg-http
+  name: pgsql-http
+  description: Make HTTP requests from PostgreSQL functions
+  problem: Need to call webhooks from triggers?
+  category: api
+  url: https://github.com/pramsey/pgsql-http
+  toolType: extension
+
+- id: pg-net
+  name: pg_net
+  description: Async HTTP requests from Postgres with response handling
+  problem: Need non-blocking HTTP calls?
+  category: api
+  url: https://github.com/supabase/pg_net
+  toolType: extension
+
+- id: nocodb
+  name: NocoDB
+  description: Open source Airtable alternative on Postgres
+  problem: Need a spreadsheet UI for your database?
+  category: ui
+  url: https://github.com/nocodb/nocodb
+  replaces: [Airtable]
+  toolType: software
+
+- id: baserow
+  name: Baserow
+  description: Open source no-code database platform
+  problem: Need a collaborative database interface?
+  category: ui
+  url: https://github.com/bram2w/baserow
+  replaces: [Airtable]
+  toolType: software
+
+- id: supabase-wrappers
+  name: Supabase Wrappers
+  description: Foreign data wrappers for Stripe, Firebase, Airtable, and 20+ services
+  problem: Need to query external APIs as tables?
+  category: api
+  url: https://github.com/supabase/wrappers
+  toolType: extension
+
+- id: graphjin
+  name: GraphJin
+  description: Instant GraphQL and REST APIs with AI assistant support
+  problem: Need auto-generated APIs from your schema?
+  category: api
+  url: https://github.com/dosco/graphjin
+  toolType: software
+
+# Auth & Security
+- id: pg-jwt
+  name: pgjwt
+  description: PostgreSQL extension for JWT generation and verification
+  problem: Need to handle JWTs in the database?
+  category: auth
+  url: https://github.com/michelp/pgjwt
+  toolType: extension
+
+- id: pgcrypto
+  name: pgcrypto
+  description: Cryptographic functions for PostgreSQL
+  problem: Need encryption at the database level?
+  category: auth
+  url: https://www.postgresql.org/docs/current/pgcrypto.html
+  toolType: extension
+
+- id: supabase-vault
+  name: Supabase Vault
+  description: Secrets management extension for Postgres
+  problem: Need to store secrets securely?
+  category: auth
+  url: https://github.com/supabase/vault
+  toolType: extension
+
+# Audit Logging
+- id: supa-audit
+  name: supa_audit
+  description: Generic audit logging for Postgres tables
+  problem: Need to track who changed what?
+  category: audit
+  url: https://github.com/supabase/supa_audit
+  toolType: extension
+
+- id: pgaudit
+  name: pgAudit
+  description: Detailed session and object audit logging for compliance
+  problem: Need SOC2/HIPAA audit trails?
+  category: audit
+  url: https://github.com/pgaudit/pgaudit
+  toolType: extension
+
+- id: pgmemento
+  name: pgMemento
+  description: Complete audit trail with data versioning and time travel queries
+  problem: Need to see historical data states?
+  category: audit
+  url: https://github.com/pgMemento/pgMemento
+  toolType: extension
+
+- id: bemi
+  name: Bemi
+  description: Automatic audit logging with high reliability using CDC and WAL
+  problem: Need comprehensive audit trails for compliance?
+  category: audit
+  url: https://github.com/BemiHQ/bemi
+  toolType: software
+
+- id: temporal-tables
+  name: Temporal Tables
+  description: System-versioned temporal tables with automatic history tracking
+  problem: Need SQL:2011 temporal table support?
+  category: audit
+  url: https://github.com/arkhipov/temporal_tables
+  toolType: extension
+
+# Migrations
+- id: pgroll
+  name: pgroll
+  description: Zero-downtime schema migrations with automatic rollback
+  problem: Need safe schema changes in production?
+  category: migrations
+  url: https://github.com/xataio/pgroll
+  toolType: software
+
+- id: atlas
+  name: Atlas
+  description: Database schema as code with declarative migrations
+  problem: Need infrastructure-as-code for your schema?
+  category: migrations
+  url: https://github.com/ariga/atlas
+  toolType: software
+
+- id: sqitch
+  name: Sqitch
+  description: Database change management with dependency tracking
+  problem: Need version-controlled database changes?
+  category: migrations
+  url: https://github.com/sqitchers/sqitch
+  toolType: software
+
+- id: bytebase
+  name: Bytebase
+  description: Database DevOps with CI/CD and access control
+  problem: Need team collaboration on database changes?
+  category: migrations
+  url: https://github.com/bytebase/bytebase
+  toolType: software
+
+- id: pg-schema-diff
+  name: pg-schema-diff
+  description: Compute schema diffs and generate safe migration SQL
+  problem: Need zero-downtime schema migrations?
+  category: migrations
+  url: https://github.com/stripe/pg-schema-diff
+  toolType: software
+
+# Scaling & Connection Management
+- id: pgbouncer
+  name: PgBouncer
+  description: Lightweight connection pooler for PostgreSQL
+  problem: Need to handle more connections?
+  category: scaling
+  url: https://github.com/pgbouncer/pgbouncer
+  toolType: software
+
+- id: supavisor
+  name: Supavisor
+  description: Cloud-native connection pooler written in Elixir
+  problem: Need scalable multi-tenant connection pooling?
+  category: scaling
+  url: https://github.com/supabase/supavisor
+  toolType: software
+
+- id: pgcat
+  name: PgCat
+  description: Connection pooler with query load balancing and sharding
+  problem: Need read replicas and load balancing?
+  category: scaling
+  url: https://github.com/postgresml/pgcat
+  toolType: software
+
+- id: spock
+  name: Spock
+  description: Multi-master replication with conflict resolution
+  problem: Need active-active replication?
+  category: scaling
+  url: https://github.com/pgEdge/spock
+  toolType: extension
+
+- id: pghero
+  name: PGHero
+  description: Performance dashboard for Postgres with index suggestions
+  problem: Need to identify slow queries?
+  category: tuning
+  url: https://github.com/ankane/pghero
+  toolType: software
+
+- id: hypopg
+  name: HypoPG
+  description: Test indexes without creating them
+  problem: Need to evaluate index impact before creating?
+  category: tuning
+  url: https://github.com/HypoPG/hypopg
+  toolType: extension
+
+- id: dexter
+  name: Dexter
+  description: Automatic index recommendations based on query analysis
+  problem: Need help choosing indexes?
+  category: tuning
+  url: https://github.com/ankane/dexter
+  toolType: software
+
+- id: index-advisor
+  name: index_advisor
+  description: Automatic index recommendations based on query analysis
+  problem: Need help finding missing indexes?
+  category: tuning
+  url: https://github.com/supabase/index_advisor
+  toolType: extension
+
+- id: pg-hint-plan
+  name: pg_hint_plan
+  description: Control query execution plans with SQL hints
+  problem: Need to override the query planner?
+  category: tuning
+  url: https://github.com/ossc-db/pg_hint_plan
+  toolType: extension
+
+# Testing
+- id: pgtap
+  name: pgTAP
+  description: Unit testing framework for PostgreSQL with TAP output
+  problem: Need to test database functions and schemas?
+  category: testing
+  url: https://github.com/theory/pgtap
+  toolType: extension
+
+# Browser & Embedded
+- id: pglite
+  name: PGLite
+  description: Run Postgres in the browser via WebAssembly
+  problem: Need offline-first or local-first apps?
+  category: tooling
+  url: https://github.com/electric-sql/pglite
+  toolType: software
+
+# Package Management
+- id: pgxman
+  name: pgxman
+  description: npm-style package manager for Postgres extensions
+  problem: Need easy extension installation?
+  category: tooling
+  url: https://github.com/pgxman/pgxman
+  toolType: software
+
+- id: dbdev
+  name: dbdev
+  description: Package manager for Postgres trusted language extensions
+  problem: Need to share and install TLE packages?
+  category: tooling
+  url: https://github.com/supabase/dbdev
+  toolType: software
+
+# Kubernetes
+- id: cloudnative-pg
+  name: CloudNativePG
+  description: Kubernetes operator for running PostgreSQL clusters
+  problem: Need to run Postgres on Kubernetes?
+  category: tooling
+  url: https://github.com/cloudnative-pg/cloudnative-pg
+  toolType: software

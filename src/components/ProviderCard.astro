@@ -1,0 +1,59 @@
+---
+export interface Props {
+  name: string;
+  description: string;
+  url: string;
+  logo: string;
+  features: string[];
+  freeTier?: string;
+  featured?: boolean;
+}
+
+const { name, description, url, logo, features, freeTier, featured } = Astro.props;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    "block p-5 bg-white rounded-lg border hover:shadow-lg transition-all group",
+    featured ? "border-pg-blue border-2" : "border-gray-200 hover:border-pg-blue"
+  ]}
+>
+  <div class="flex items-start gap-4">
+    <img
+      src={logo}
+      alt={`${name} logo`}
+      class="w-12 h-12 rounded-lg flex-shrink-0 object-contain"
+    />
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="font-display font-semibold text-text group-hover:text-pg-blue transition-colors">
+          {name}
+        </h3>
+        {featured && (
+          <span class="text-xs px-2 py-0.5 bg-accent text-white rounded-full font-medium">
+            Featured
+          </span>
+        )}
+        <svg class="w-4 h-4 text-gray-400 group-hover:text-pg-blue transition-colors ml-auto flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </div>
+      <p class="text-sm text-text-muted mb-3">{description}</p>
+      <div class="flex flex-wrap gap-1.5 mb-2">
+        {features.slice(0, 4).map((feature) => (
+          <span class="text-xs px-2 py-0.5 bg-gray-100 text-text-muted rounded">
+            {feature}
+          </span>
+        ))}
+      </div>
+      {freeTier && (
+        <p class="text-xs text-green-600 font-medium">
+          {freeTier}
+        </p>
+      )}
+    </div>
+  </div>
+</a>

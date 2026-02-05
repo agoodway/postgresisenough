@@ -1,0 +1,130 @@
+# Featured / Start Here
+- id: choose-boring-technology
+  title: Choose Boring Technology
+  url: https://mcfunley.com/choose-boring-technology
+  author: Dan McKinley
+  description: The classic essay on spending "innovation tokens" wisely. Every new technology comes with unknown unknowns.
+  type: article
+  year: 2015
+  featured: true
+
+- id: just-use-postgres-amazingcto
+  title: Just Use Postgres for Everything
+  url: https://www.amazingcto.com/postgres-for-everything
+  author: Stephan Schmidt
+  description: Why one database beats five. Reduce operational complexity by consolidating on Postgres.
+  type: article
+  year: 2024
+  featured: true
+
+- id: sive-rs-pg
+  title: "Derek Sivers: Why I Switched to PostgreSQL"
+  url: https://sive.rs/pg
+  author: Derek Sivers
+  description: Put your app logic in the database. After 18 years with the same Postgres database, Sivers explains why database functions beat application code.
+  type: article
+  featured: true
+
+# Articles
+- id: just-use-postgres-mccue
+  title: Just Use Postgres
+  url: https://mccue.dev/pages/8-16-24-just-use-postgres
+  author: Ethan McCue
+  description: Postgres as the default choice for new applications. Why flexibility beats premature optimization.
+  type: article
+  year: 2024
+
+- id: postgres-best-database
+  title: PostgreSQL is the World's Best Database
+  url: https://www.enterprisedb.com/blog/postgresql-is-the-worlds-best-database
+  description: Security, extensibility, and community make Postgres the best database. From EDB (2ndQuadrant).
+  type: article
+
+- id: postgres-eating-world
+  title: Postgres is Eating the Database World
+  url: https://pigsty.io/blog/pg/pg-eat-db-world/
+  author: Feng Ruohang
+  description: How Postgres became the Linux of databases. The extension ecosystem as a competitive moat.
+  type: article
+  year: 2024
+
+- id: its-2026-just-use-postgres
+  title: "It's 2026, Just Use Postgres"
+  url: https://www.tigerdata.com/blog/its-2026-just-use-postgres
+  description: With modern extensions, Postgres handles 99% of use cases. BM25 search, vectors, time-series in one database.
+  type: article
+  year: 2026
+
+- id: postgres-as-queue
+  title: Postgres as a Queue
+  url: https://leontrolski.github.io/postgres-as-queue.html
+  author: leontrolski
+  description: SKIP LOCKED and advisory locks for simple, durable message queues without extra infrastructure.
+  type: article
+
+- id: postgres-vectors
+  title: Postgres is All You Need, Even for Vectors
+  url: https://anyblockers.com/posts/postgres-is-all-you-need-even-for-vectors
+  description: Why colocating vector embeddings with relational data beats specialized vector databases. pgvector is now faster than Pinecone at 75% less cost.
+  type: article
+  year: 2024
+
+- id: postgres-cache-martin
+  title: "You Don't Need a Dedicated Cache Service"
+  url: https://martinheinz.dev/blog/105
+  author: Martin Heinz
+  description: Turn PostgreSQL into a fully featured caching service with UNLOGGED tables, proper expiration, and smart invalidation.
+  type: article
+  year: 2024
+
+- id: postgres-distributed-cache
+  title: "Postgres as a Distributed Cache"
+  url: https://techcommunity.microsoft.com/blog/azuredevcommunityblog/postgres-as-a-distributed-cache-unlocks-speed-and-simplicity-for-modern-net-work/4462139
+  author: Microsoft
+  description: Using UNLOGGED tables to bypass WAL for performant caching. Includes the Microsoft.Extensions.Caching.Postgres NuGet package.
+  type: article
+  year: 2025
+
+- id: boring-technology-club
+  title: Boring Technology Club
+  url: https://boringtechnology.club
+  author: Dan McKinley
+  description: The slide deck version of "Choose Boring Technology" with additional commentary.
+  type: talk
+
+# Books
+- id: postgres-14-internals
+  title: PostgreSQL 14 Internals
+  url: https://postgrespro.com/community/books/internals
+  author: Egor Rogov
+  description: Deep dive into how Postgres works internally. Free PDF from Postgres Professional.
+  type: book
+
+- id: art-of-postgresql
+  title: The Art of PostgreSQL
+  url: https://theartofpostgresql.com
+  author: Dimitri Fontaine
+  description: Master PostgreSQL with practical examples. From basic SQL to advanced features.
+  type: book
+
+- id: just-use-postgres-book
+  title: "Just Use Postgres!"
+  url: https://www.manning.com/books/just-use-postgres
+  author: Denis Magda
+  description: Learn to use Postgres for everything — queues, full-text search, JSON, vectors, geospatial, and time-series. The definitive guide to consolidating on one database.
+  type: book
+  year: 2025
+
+# Talks
+- id: postgres-vision-2024
+  title: "PostgreSQL: The Next 20 Years"
+  url: https://www.youtube.com/watch?v=gEcN0NzNChw
+  description: Core team members discuss where Postgres is headed and the extension ecosystem.
+  type: talk
+  year: 2024
+
+- id: scaling-postgres-instagram
+  title: Scaling Instagram's Postgres
+  url: https://www.youtube.com/watch?v=hnpzNAPiC0E
+  description: How Instagram ran on Postgres at massive scale before the Facebook acquisition.
+  type: talk

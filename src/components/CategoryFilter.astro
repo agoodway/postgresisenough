@@ -1,0 +1,60 @@
+---
+import { categories } from '../content.config';
+
+export interface Props {
+  activeCategory?: string;
+}
+
+const { activeCategory = 'all' } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  queues: 'Queues',
+  search: 'Search',
+  vectors: 'Vectors',
+  'time-series': 'Time-Series',
+  caching: 'Caching',
+  documents: 'Documents',
+  graphs: 'Graphs',
+  geo: 'Geospatial',
+  analytics: 'Analytics',
+  cdc: 'CDC',
+  api: 'API',
+  ui: 'UI',
+  auth: 'Auth',
+  migrations: 'Migrations',
+  scaling: 'Scaling',
+  tuning: 'Tuning',
+  audit: 'Audit',
+  testing: 'Testing',
+  tooling: 'Tooling',
+};
+---
+
+<div class="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+  <button
+    type="button"
+    data-category-filter="all"
+    class:list={[
+      'px-3 py-1.5 text-sm font-medium rounded-full transition-colors cursor-pointer',
+      activeCategory === 'all'
+        ? 'bg-pg-blue text-white'
+        : 'bg-gray-100 text-text-muted hover:bg-gray-200',
+    ]}
+  >
+    All
+  </button>
+  {categories.map((cat) => (
+    <button
+      type="button"
+      data-category-filter={cat}
+      class:list={[
+        'px-3 py-1.5 text-sm font-medium rounded-full transition-colors cursor-pointer',
+        activeCategory === cat
+          ? 'bg-pg-blue text-white'
+          : 'bg-gray-100 text-text-muted hover:bg-gray-200',
+      ]}
+    >
+      {categoryLabels[cat] || cat}
+    </button>
+  ))}
+</div>

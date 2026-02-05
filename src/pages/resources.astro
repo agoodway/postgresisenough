@@ -1,0 +1,135 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import ContributeCTA from '../components/ContributeCTA.astro';
+import Schema from '../components/Schema.astro';
+
+const resources = await getCollection('resources');
+
+const featured = resources.filter((r) => r.data.featured);
+const articles = resources.filter((r) => r.data.type === 'article' && !r.data.featured);
+const talks = resources.filter((r) => r.data.type === 'talk');
+const books = resources.filter((r) => r.data.type === 'book');
+---
+
+<BaseLayout
+  title="Resources"
+  description="Essential reading on the 'Postgres is enough' philosophy. Articles, talks, and books on choosing boring technology and simplifying your stack."
+>
+  <Fragment slot="head">
+    <Schema
+      item={{
+        '@type': 'CollectionPage',
+        name: 'Postgres Philosophy Resources',
+        description: 'Curated articles, talks, and books on using PostgreSQL for everything.',
+        url: `${Astro.site?.href}resources`,
+      }}
+    />
+  </Fragment>
+
+  <div class="py-12 px-4">
+    <div class="max-w-3xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text mb-4">
+          Resources
+        </h1>
+        <p class="text-text-muted max-w-2xl mx-auto">
+          The essays, talks, and books that shaped the "Postgres Is Enough" philosophy.
+          Start with the featured pieces, then explore deeper.
+        </p>
+      </div>
+
+      <!-- Featured / Start Here -->
+      {featured.length > 0 && (
+        <section class="mb-12">
+          <h2 class="font-display text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            Start Here
+          </h2>
+          <div class="space-y-3">
+            {featured.map((resource) => (
+              <ResourceCard
+                title={resource.data.title}
+                url={resource.data.url}
+                author={resource.data.author}
+                description={resource.data.description}
+                type={resource.data.type}
+                year={resource.data.year}
+                featured={resource.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Articles -->
+      {articles.length > 0 && (
+        <section class="mb-12">
+          <h2 class="font-display text-xl font-bold text-text mb-4">
+            Articles
+          </h2>
+          <div class="space-y-3">
+            {articles.map((resource) => (
+              <ResourceCard
+                title={resource.data.title}
+                url={resource.data.url}
+                author={resource.data.author}
+                description={resource.data.description}
+                type={resource.data.type}
+                year={resource.data.year}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Talks -->
+      {talks.length > 0 && (
+        <section class="mb-12">
+          <h2 class="font-display text-xl font-bold text-text mb-4">
+            Talks
+          </h2>
+          <div class="space-y-3">
+            {talks.map((resource) => (
+              <ResourceCard
+                title={resource.data.title}
+                url={resource.data.url}
+                author={resource.data.author}
+                description={resource.data.description}
+                type={resource.data.type}
+                year={resource.data.year}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Books -->
+      {books.length > 0 && (
+        <section class="mb-12">
+          <h2 class="font-display text-xl font-bold text-text mb-4">
+            Books
+          </h2>
+          <div class="space-y-3">
+            {books.map((resource) => (
+              <ResourceCard
+                title={resource.data.title}
+                url={resource.data.url}
+                author={resource.data.author}
+                description={resource.data.description}
+                type={resource.data.type}
+                year={resource.data.year}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <ContributeCTA itemType="resource" />
+    </div>
+  </div>
+</BaseLayout>

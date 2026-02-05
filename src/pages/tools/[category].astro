@@ -1,0 +1,214 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import Schema from '../../components/Schema.astro';
+import { categories, type Category } from '../../content.config';
+
+export async function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { category },
+  }));
+}
+
+const { category } = Astro.params as { category: Category };
+
+const allTools = await getCollection('tools');
+const tools = allTools.filter((tool) => tool.data.category === category);
+
+// Category metadata
+const categoryMeta: Record<Category, { title: string; h1: string; description: string; intro: string }> = {
+  queues: {
+    title: 'Postgres Message Queues',
+    h1: 'Postgres as a Message Queue',
+    description: 'PostgreSQL extensions for message queues and background jobs. Replace Redis and RabbitMQ with SKIP LOCKED.',
+    intro: `<strong>Why not Redis or RabbitMQ?</strong> Before you add another service to your docker-compose, consider: Postgres has had row-level locking since 2003. <code>SELECT ... FOR UPDATE SKIP LOCKED</code> gives you a durable, transactional queue with no new services to monitor. Add LISTEN/NOTIFY for real-time notifications. Same backup strategy, same monitoring, same database you already know. (For high-throughput streaming with fan-out and partitioning, Kafka is still the right choice.)`,
+  },
+  search: {
+    title: 'Postgres Full-Text Search',
+    h1: 'Full-Text Search with Postgres',
+    description: 'PostgreSQL extensions for full-text search, fuzzy matching, and BM25 ranking. Replace Elasticsearch and Solr.',
+    intro: `<strong>Why not Elasticsearch or Solr?</strong> Postgres has had full-text search since 2008. Built-in <code>tsvector</code> and GIN indexes handle most search use cases. Add <code>pg_trgm</code> for typo tolerance. ParadeDB brings BM25 scoring—the exact same algorithm Elasticsearch uses. Your data stays in one place, your queries stay in SQL, and you skip the JVM heap tuning nightmares.`,
+  },
+  vectors: {
+    title: 'Postgres Vector Search',
+    h1: 'Vector Search with Postgres',
+    description: 'PostgreSQL extensions for vector embeddings and AI/ML similarity search. Replace Pinecone, Milvus, and Qdrant.',
+    intro: `<strong>Why not Pinecone, Weaviate, or Qdrant?</strong> The AI boom brought specialized vector databases, but pgvector brings similar capabilities to Postgres using the same HNSW indexing. Your vectors live next to your data, in the same transactions, with the same backup strategy. No sync issues, no double-storing metadata. For most RAG applications, this is all you need.`,
+  },
+  'time-series': {
+    title: 'Postgres Time-Series',
+    h1: 'Time-Series Data with Postgres',
+    description: 'PostgreSQL extensions for time-series data, metrics, and IoT workloads. Replace InfluxDB and specialized TSDBs.',
+    intro: `TimescaleDB extends Postgres with automatic partitioning, compression, and time-series specific functions. It's still Postgres—same SQL, same tools, same ecosystem. For metrics, IoT data, or any time-ordered workload, you get purpose-built performance without learning a new database.`,
+  },
+  caching: {
+    title: 'Postgres Caching',
+    h1: 'Caching with Postgres',
+    description: 'PostgreSQL tools for caching and materialized views. Replace Redis and Memcached for many use cases.',
+    intro: `<strong>Why not Redis or Memcached?</strong> You're adding operational complexity for marginal gains. UNLOGGED tables skip WAL writes for fast, ephemeral storage (note: data is lost on crash and not replicated—use for truly ephemeral data). Materialized views cache expensive query results. ReadySet automatically caches queries and keeps them fresh. For most apps, Postgres handles caching without another service to manage, monitor, and secure.`,
+  },
+  documents: {
+    title: 'Postgres Document Storage',
+    h1: 'Document Storage with Postgres',
+    description: 'PostgreSQL JSONB and extensions for document-oriented workloads. Replace MongoDB with native JSON support.',
+    intro: `<strong>Why not MongoDB, DynamoDB, or Cassandra?</strong> Postgres JSONB has been production-ready since 2014. You get flexible schemas, GIN indexes for fast queries, and full SQL power—plus joins, transactions, and constraints when you need them. FerretDB adds MongoDB wire protocol compatibility if you must. For most document workloads, JSONB in Postgres beats a separate cluster you have to learn, monitor, and maintain.`,
+  },
+  graphs: {
+    title: 'Postgres Graph Databases',
+    h1: 'Graph Data with Postgres',
+    description: 'PostgreSQL extensions for graph queries and relationships. Replace Neo4j with Apache AGE and recursive CTEs.',
+    intro: `Recursive CTEs handle many graph queries in plain SQL. For heavier graph workloads, Apache AGE adds openCypher support to Postgres. EdgeDB builds a graph-relational model on top of Postgres. You don't necessarily need a separate graph database for relationship queries.`,
+  },
+  geo: {
+    title: 'Postgres Geospatial',
+    h1: 'Geospatial Queries with Postgres',
+    description: 'PostgreSQL extensions for geographic data, mapping, and spatial analysis. PostGIS is the industry standard.',
+    intro: `PostGIS is the gold standard for geospatial databases—it's been around since 2001 and powers everything from OpenStreetMap to government GIS systems. Location queries, spatial indexes, routing algorithms, and geometric operations all work in Postgres.`,
+  },
+  analytics: {
+    title: 'Postgres Analytics',
+    h1: 'Analytics with Postgres',
+    description: 'PostgreSQL extensions for OLAP, columnar storage, and analytical workloads. Replace ClickHouse for many use cases.',
+    intro: `Postgres can handle more analytical workloads than you might think. Columnar extensions like Hydra and pg_analytics bring OLAP performance. Citus adds distributed query execution. For many teams, Postgres scales further than expected before you need a dedicated data warehouse.`,
+  },
+  cdc: {
+    title: 'Postgres Change Data Capture',
+    h1: 'Change Data Capture with Postgres',
+    description: 'PostgreSQL tools for CDC, event streaming, and data synchronization. Built on logical replication.',
+    intro: `Postgres logical replication provides a built-in change stream. Debezium captures changes and sends them to Kafka or other systems. PeerDB optimizes replication to data warehouses. You can build event-driven systems on top of your existing Postgres without adding another primary datastore.`,
+  },
+  api: {
+    title: 'Postgres API Generation',
+    h1: 'APIs from Postgres',
+    description: 'PostgreSQL tools for automatic REST and GraphQL API generation. PostgREST, Hasura, and more.',
+    intro: `Your Postgres schema can become an API automatically. PostgREST generates REST endpoints from tables and views. Hasura and PostGraphile create GraphQL APIs with subscriptions. Supabase wraps it all with auth and real-time. For CRUD-heavy applications, you might not need a custom backend.`,
+  },
+  ui: {
+    title: 'Postgres UI Builders',
+    h1: 'User Interfaces from Postgres',
+    description: 'PostgreSQL tools for building web interfaces, admin panels, and no-code applications directly from your database.',
+    intro: `Build user interfaces directly from your Postgres data. SQLPage creates web apps entirely in SQL. NocoDB and Baserow provide Airtable-like interfaces on top of your tables. Skip the frontend framework—for internal tools, admin panels, and data entry, these tools get you from schema to UI fast.`,
+  },
+  auth: {
+    title: 'Postgres Auth & Security',
+    h1: 'Auth and Security with Postgres',
+    description: 'PostgreSQL extensions for authentication, encryption, and audit logging.',
+    intro: `Postgres Row Level Security (RLS) enforces access control at the database layer. pgjwt handles JWT verification in SQL. pgcrypto provides encryption functions. For audit trails, temporal tables and audit extensions track every change. Security can live in the database.`,
+  },
+  migrations: {
+    title: 'Postgres Migrations',
+    h1: 'Database Migrations for Postgres',
+    description: 'Tools for PostgreSQL schema migrations, version control, and safe deployments.',
+    intro: `Schema changes are where things go wrong. pgroll enables zero-downtime migrations with automatic rollback. Atlas brings infrastructure-as-code to your schema. Sqitch tracks changes with dependency graphs. Bytebase adds team collaboration and CI/CD integration.`,
+  },
+  scaling: {
+    title: 'Postgres Scaling',
+    h1: 'Scaling Postgres',
+    description: 'PostgreSQL tools for connection pooling, replication, and horizontal scaling.',
+    intro: `Postgres scales vertically further than most expect. When you do need to scale out, PgBouncer and Supavisor handle connection pooling. Read replicas offload queries. Citus and Spock add horizontal scaling when you truly need it. Start simple, scale when necessary.`,
+  },
+  tuning: {
+    title: 'Postgres Performance Tuning',
+    h1: 'Performance Tuning for Postgres',
+    description: 'PostgreSQL tools for query optimization, index recommendations, and performance monitoring.',
+    intro: `Before scaling out, optimize what you have. PGHero surfaces slow queries and suggests indexes. HypoPG lets you test indexes without creating them. Dexter and index_advisor automatically recommend missing indexes. pg_hint_plan gives you manual control over query plans when the optimizer needs guidance.`,
+  },
+  audit: {
+    title: 'Postgres Audit Logging',
+    h1: 'Audit Logging with Postgres',
+    description: 'PostgreSQL extensions for audit trails, compliance logging, and data versioning.',
+    intro: `Need to track who changed what and when? Postgres extensions handle audit logging at the database level. pgAudit provides detailed session logging for SOC2/HIPAA compliance. pgMemento and temporal tables enable time-travel queries to see historical states. supa_audit offers lightweight table-level tracking.`,
+  },
+  testing: {
+    title: 'Postgres Testing',
+    h1: 'Testing with Postgres',
+    description: 'PostgreSQL extensions for unit testing database functions, schemas, and constraints.',
+    intro: `Test your database logic where it lives. pgTAP brings TAP-compliant unit testing directly into Postgres, letting you test functions, triggers, and schema constraints without leaving SQL.`,
+  },
+  tooling: {
+    title: 'Postgres Tooling',
+    h1: 'Postgres Developer Tools',
+    description: 'PostgreSQL package managers, Kubernetes operators, and developer tooling.',
+    intro: `Tools that make working with Postgres easier. pgxman and dbdev bring npm-style package management to extensions. CloudNativePG runs Postgres on Kubernetes. PGLite lets you run Postgres in the browser via WebAssembly.`,
+  },
+};
+
+const meta = categoryMeta[category];
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+>
+  <Fragment slot="head">
+    <Schema
+      item={{
+        '@type': 'CollectionPage',
+        name: meta.h1,
+        description: meta.description,
+        url: `${Astro.site?.href}tools/${category}`,
+        numberOfItems: tools.length,
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site?.href },
+            { '@type': 'ListItem', position: 2, name: 'Tools', item: `${Astro.site?.href}tools` },
+            { '@type': 'ListItem', position: 3, name: meta.h1 },
+          ],
+        },
+      }}
+    />
+  </Fragment>
+
+  <div class="py-12 px-4">
+    <div class="max-w-5xl mx-auto">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-text-muted mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2">
+          <li><a href="/" class="hover:text-pg-blue">Home</a></li>
+          <li><span class="text-gray-300">/</span></li>
+          <li><a href="/tools" class="hover:text-pg-blue">Tools</a></li>
+          <li><span class="text-gray-300">/</span></li>
+          <li class="text-text" aria-current="page">{meta.h1.replace(' with Postgres', '').replace(' from Postgres', '')}</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text mb-4">
+          {meta.h1}
+        </h1>
+        <p class="text-text-muted text-lg leading-relaxed max-w-3xl" set:html={meta.intro} />
+      </div>
+
+      <!-- Tools Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        {tools.map((tool) => (
+          <ToolCard
+            name={tool.data.name}
+            description={tool.data.description}
+            problem={tool.data.problem}
+            category={tool.data.category}
+            url={tool.data.url}
+            replaces={tool.data.replaces}
+            toolType={tool.data.toolType}
+          />
+        ))}
+      </div>
+
+      <!-- Back to all tools -->
+      <div class="text-center">
+        <a
+          href="/tools"
+          class="inline-flex items-center gap-2 text-pg-blue hover:text-pg-blue-dark font-medium"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          View all tools
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

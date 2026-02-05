@@ -1,43 +1,69 @@
-# Astro Starter Kit: Minimal
+# Postgres Is Enough
 
-```sh
-pnpm create astro@latest -- --template minimal
+A curated directory of PostgreSQL extensions and tools that can replace specialized databases. Before adding Redis, Elasticsearch, Kafka, or MongoDB to your stack, see what Postgres can do.
+
+**Live site:** [postgresisenough.com](https://postgresisenough.com)
+
+## Contributing
+
+Found a tool we're missing? Want to add a hosting provider or resource? PRs are welcome!
+
+### Add a Tool
+
+Edit `src/content/tools.yaml` and add an entry:
+
+```yaml
+- id: your-tool-id
+  name: Tool Name
+  description: Brief description of what it does
+  problem: What problem does it solve? (phrase as a question)
+  category: queues|search|vectors|time-series|caching|documents|graphs|geo|analytics|cdc|api|ui|auth|migrations|scaling|tuning|audit|testing|tooling
+  url: https://github.com/org/repo
+  replaces: [Redis, MongoDB]  # optional
+  toolType: extension|software
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Add a Provider
 
-## 🚀 Project Structure
+Edit `src/content/providers.yaml`:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```yaml
+- id: provider-id
+  name: Provider Name
+  description: Brief description
+  url: https://provider.com
+  logo: /logos/provider.svg  # add logo to public/logos/
+  features: [Feature 1, Feature 2, Feature 3]
+  featured: false  # set to true for featured providers
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Add a Resource
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Edit `src/content/resources.yaml`:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```yaml
+- id: resource-id
+  title: Article or Talk Title
+  url: https://example.com/article
+  author: Author Name
+  description: Brief description
+  type: article|talk|book|course
+  year: 2024
+  featured: false
+```
 
-## 🧞 Commands
+## Development
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `pnpm install`    | Install dependencies                        |
+| `pnpm dev`        | Start local dev server at `localhost:4321`  |
+| `pnpm build`      | Build production site to `./dist/`          |
+| `pnpm preview`    | Preview build locally before deploying      |
+| `pnpm check`      | Run TypeScript diagnostics                  |
 
-## 👀 Want to learn more?
+## License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MIT

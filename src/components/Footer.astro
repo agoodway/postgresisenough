@@ -1,0 +1,27 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-gray-200 bg-white mt-auto">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-center sm:text-left">
+        <p class="text-sm text-text-muted">
+          A project by <a href="https://goodway.dev" target="_blank" rel="noopener noreferrer" class="text-pg-blue hover:text-pg-blue-dark font-medium">Goodway</a> — we build software that drives results.
+        </p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a
+          href="https://github.com/agoodway/postgresisenough"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-text-muted hover:text-pg-blue transition-colors"
+        >
+          GitHub
+        </a>
+        <span class="text-gray-300">|</span>
+        <span class="text-sm text-text-muted">&copy; {currentYear}</span>
+      </div>
+    </div>
+  </div>
+</footer>

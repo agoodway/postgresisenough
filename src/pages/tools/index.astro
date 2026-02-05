@@ -1,0 +1,185 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+import SearchInput from '../../components/SearchInput.astro';
+import ContributeCTA from '../../components/ContributeCTA.astro';
+import Schema from '../../components/Schema.astro';
+
+const tools = await getCollection('tools');
+const toolCount = tools.length;
+---
+
+<BaseLayout
+  title="PostgreSQL Tools Directory"
+  description="Browse 50+ PostgreSQL extensions, libraries, and tools organized by problem domain. Find alternatives to Redis, Elasticsearch, MongoDB, and more."
+>
+  <Fragment slot="head">
+    <Schema
+      item={{
+        '@type': 'CollectionPage',
+        name: 'PostgreSQL Tools Directory',
+        description: 'A curated directory of PostgreSQL extensions and tools organized by the problems they solve.',
+        url: `${Astro.site?.href}tools`,
+        numberOfItems: toolCount,
+      }}
+    />
+  </Fragment>
+
+  <div class="py-12 px-4">
+    <div class="max-w-5xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text mb-4">
+          PostgreSQL Tools Directory
+        </h1>
+        <p class="text-text-muted max-w-2xl mx-auto">
+          PostgreSQL extensions and software for search, queues, vectors, caching, analytics, and more. Find the right tool for your use case.
+        </p>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="mb-8 space-y-4">
+        <SearchInput placeholder="Search tools, problems, or what you're replacing..." />
+
+        <!-- Type Toggle -->
+        <div class="flex items-center gap-4 pb-4 border-b border-gray-200">
+          <span class="text-sm font-medium text-text">Type:</span>
+          <div class="flex gap-2" role="group" aria-label="Filter by tool type">
+            <button
+              type="button"
+              data-type-filter="all"
+              class="px-4 py-1.5 text-sm font-medium rounded-md transition-colors border-2 border-pg-blue bg-pg-blue text-white cursor-pointer"
+            >
+              All
+            </button>
+            <button
+              type="button"
+              data-type-filter="extension"
+              class="px-4 py-1.5 text-sm font-medium rounded-md transition-colors border-2 border-gray-300 bg-white text-text-muted hover:border-pg-blue hover:text-pg-blue cursor-pointer"
+            >
+              Extensions
+            </button>
+            <button
+              type="button"
+              data-type-filter="software"
+              class="px-4 py-1.5 text-sm font-medium rounded-md transition-colors border-2 border-gray-300 bg-white text-text-muted hover:border-pg-blue hover:text-pg-blue cursor-pointer"
+            >
+              Software
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="flex items-center gap-4">
+          <span class="text-sm font-medium text-text">Category:</span>
+          <CategoryFilter />
+        </div>
+      </div>
+
+      <!-- Tool count -->
+      <p class="text-sm text-text-muted mb-6">
+        Showing <span id="visible-count">{toolCount}</span> of {toolCount} tools
+      </p>
+
+      <!-- Tools Grid -->
+      <div id="tools-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {tools.map((tool) => (
+          <ToolCard
+            name={tool.data.name}
+            description={tool.data.description}
+            problem={tool.data.problem}
+            category={tool.data.category}
+            url={tool.data.url}
+            replaces={tool.data.replaces}
+            toolType={tool.data.toolType}
+          />
+        ))}
+      </div>
+
+      <ContributeCTA itemType="tool" />
+    </div>
+  </div>
+
+  <!-- Client-side search and filter -->
+  <script>
+    function initFilters() {
+      const searchInput = document.getElementById('search') as HTMLInputElement;
+      const tools = document.querySelectorAll('[data-tool]');
+      const categoryButtons = document.querySelectorAll('[data-category-filter]');
+      const typeButtons = document.querySelectorAll('[data-type-filter]');
+      const visibleCount = document.getElementById('visible-count');
+
+      let activeCategory = 'all';
+      let activeType = 'all';
+
+      function filterTools() {
+        const query = searchInput?.value.toLowerCase() || '';
+        let count = 0;
+
+        tools.forEach((tool) => {
+          const el = tool as HTMLElement;
+          const searchable = el.dataset.searchable?.toLowerCase() || '';
+          const category = el.dataset.category || '';
+          const toolType = el.dataset.toolType || '';
+
+          const matchesSearch = searchable.includes(query);
+          const matchesCategory = activeCategory === 'all' || category === activeCategory;
+          const matchesType = activeType === 'all' || toolType === activeType;
+
+          if (matchesSearch && matchesCategory && matchesType) {
+            el.style.display = '';
+            count++;
+          } else {
+            el.style.display = 'none';
+          }
+        });
+
+        if (visibleCount) {
+          visibleCount.textContent = count.toString();
+        }
+      }
+
+      searchInput?.addEventListener('input', filterTools);
+
+      categoryButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const category = (btn as HTMLElement).dataset.categoryFilter || 'all';
+          activeCategory = category;
+
+          // Update active state
+          categoryButtons.forEach((b) => {
+            b.classList.remove('bg-pg-blue', 'text-white');
+            b.classList.add('bg-gray-100', 'text-text-muted');
+          });
+          btn.classList.remove('bg-gray-100', 'text-text-muted');
+          btn.classList.add('bg-pg-blue', 'text-white');
+
+          filterTools();
+        });
+      });
+
+      typeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const toolType = (btn as HTMLElement).dataset.typeFilter || 'all';
+          activeType = toolType;
+
+          // Update active state for bordered type buttons
+          typeButtons.forEach((b) => {
+            b.classList.remove('border-pg-blue', 'bg-pg-blue', 'text-white');
+            b.classList.add('border-gray-300', 'bg-white', 'text-text-muted');
+          });
+          btn.classList.remove('border-gray-300', 'bg-white', 'text-text-muted');
+          btn.classList.add('border-pg-blue', 'bg-pg-blue', 'text-white');
+
+          filterTools();
+        });
+      });
+    }
+
+    // Run on initial load and after View Transitions navigation
+    initFilters();
+    document.addEventListener('astro:after-swap', initFilters);
+  </script>
+</BaseLayout>

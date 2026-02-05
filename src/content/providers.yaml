@@ -1,0 +1,81 @@
+# Featured Providers
+- id: neon
+  name: Neon
+  description: Serverless Postgres with scale-to-zero, database branching, and instant provisioning
+  url: https://neon.tech
+  logo: /logos/neon.svg
+  features: [Serverless, Scale-to-zero, Database branching, Autoscaling]
+  featured: true
+
+- id: supabase
+  name: Supabase
+  description: Open source Firebase alternative with Postgres, Auth, Storage, and real-time subscriptions
+  url: https://supabase.com
+  logo: /logos/supabase.svg
+  features: [Auth, Real-time, Storage, Edge Functions, pgvector]
+
+# Cloud Providers
+- id: aws-rds
+  name: AWS RDS
+  description: Amazon's managed Postgres with Multi-AZ deployments, read replicas, and deep AWS integration
+  url: https://aws.amazon.com/rds/postgresql/
+  logo: /logos/aws.svg
+  features: [Multi-AZ HA, Read replicas, IAM integration, CloudWatch]
+
+- id: google-cloud-sql
+  name: Google Cloud SQL
+  description: Fully managed Postgres on Google Cloud with automated backups and high availability
+  url: https://cloud.google.com/sql/postgresql
+  logo: /logos/gcp.svg
+  features: [Automated backups, High availability, Private IP, IAM]
+
+- id: azure-postgres
+  name: Azure Cosmos DB for PostgreSQL
+  description: Microsoft's managed Postgres with Citus for horizontal scaling and distributed queries
+  url: https://azure.microsoft.com/en-us/products/cosmos-db/postgresql
+  logo: /logos/azure.svg
+  features: [Citus sharding, Distributed tables, Geo-replication, HA]
+
+# Specialized Providers
+- id: crunchy-data
+  name: Crunchy Bridge
+  description: Enterprise Postgres from core contributors with multi-cloud support and compliance certifications
+  url: https://www.crunchydata.com/products/crunchy-bridge
+  logo: /logos/crunchy.png
+  features: [Multi-cloud, SOC2/HIPAA, pgvector, Postgres experts]
+
+- id: aiven
+  name: Aiven
+  description: Multi-cloud Postgres with excellent monitoring, connection pooling, and data pipeline integrations
+  url: https://aiven.io/postgresql
+  logo: /logos/aiven.svg
+  features: [Multi-cloud, Kafka integration, Metrics, Connection pooling]
+
+# Developer-Focused
+- id: railway
+  name: Railway
+  description: Simple Postgres hosting with instant deployments and straightforward pricing
+  url: https://railway.app
+  logo: /logos/railway.svg
+  features: [Instant deploy, Simple pricing, GitHub integration]
+
+- id: render
+  name: Render
+  description: Managed Postgres with automatic daily backups and private networking
+  url: https://render.com
+  logo: /logos/render.svg
+  features: [Daily backups, PITR, Private networking, PG 17]
+
+- id: digitalocean
+  name: DigitalOcean
+  description: Predictable pricing with managed Postgres, standby nodes, and included bandwidth
+  url: https://www.digitalocean.com/products/managed-databases-postgresql
+  logo: /logos/digitalocean.svg
+  features: [Predictable pricing, Standby nodes, 1TB bandwidth included]
+
+- id: planetscale-alternative
+  name: Xata
+  description: Serverless Postgres with built-in search, file attachments, and a spreadsheet-like UI
+  url: https://xata.io
+  logo: /logos/xata.svg
+  features: [Serverless, Built-in search, File attachments, Branching]

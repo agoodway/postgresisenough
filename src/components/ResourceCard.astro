@@ -1,0 +1,56 @@
+---
+export interface Props {
+  title: string;
+  url: string;
+  author?: string;
+  description: string;
+  type: 'article' | 'talk' | 'book' | 'course';
+  year?: number;
+  featured?: boolean;
+}
+
+const { title, url, author, description, type, year, featured } = Astro.props;
+
+const typeIcons = {
+  article: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />`,
+  talk: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />`,
+  book: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`,
+  course: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />`,
+};
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    'block p-4 rounded-lg border transition-all group',
+    featured
+      ? 'bg-pg-blue/5 border-pg-blue/20 hover:border-pg-blue hover:bg-pg-blue/10'
+      : 'bg-white border-gray-200 hover:border-pg-blue hover:shadow-md',
+  ]}
+>
+  <div class="flex items-start gap-3">
+    <div class="flex-shrink-0 mt-0.5">
+      <svg class="w-5 h-5 text-pg-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={typeIcons[type]} />
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="font-display font-semibold text-text group-hover:text-pg-blue transition-colors truncate">
+          {title}
+        </h3>
+        <span class="inline-block opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+          <svg class="w-4 h-4 text-pg-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </span>
+      </div>
+      {author && (
+        <p class="text-sm text-text-muted mb-1">
+          by {author} {year && <span class="text-gray-400">({year})</span>}
+        </p>
+      )}
+      <p class="text-sm text-text-muted">{description}</p>
+    </div>
+  </div>
+</a>

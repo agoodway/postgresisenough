@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProviderCard from '../components/ProviderCard.astro';
+import ContributeCTA from '../components/ContributeCTA.astro';
+import Schema from '../components/Schema.astro';
+
+const allProviders = await getCollection('providers');
+---
+
+<BaseLayout
+  title="Postgres Hosting Providers"
+  description="Managed PostgreSQL hosting providers compared. Neon, Supabase, AWS RDS, and more. Find the right Postgres host for your project."
+>
+  <Fragment slot="head">
+    <Schema
+      item={{
+        '@type': 'CollectionPage',
+        name: 'Postgres Hosting Providers',
+        description: 'Managed PostgreSQL hosting providers for every use case.',
+        url: `${Astro.site?.href}providers`,
+      }}
+    />
+  </Fragment>
+
+  <div class="py-12 px-4">
+    <div class="max-w-5xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text mb-4">
+          Postgres Hosting Providers
+        </h1>
+        <p class="text-text-muted max-w-2xl mx-auto">
+          Don't want to manage Postgres yourself? These providers handle backups, scaling, maintenance and additional features.
+        </p>
+      </div>
+
+      <!-- All Providers -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        {allProviders.map((provider) => (
+          <ProviderCard
+            name={provider.data.name}
+            description={provider.data.description}
+            url={provider.data.url}
+            logo={provider.data.logo}
+            features={provider.data.features}
+            freeTier={provider.data.freeTier}
+            featured={provider.data.featured}
+          />
+        ))}
+      </div>
+
+      <ContributeCTA itemType="provider" />
+    </div>
+  </div>
+</BaseLayout>
