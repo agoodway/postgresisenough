@@ -4,7 +4,7 @@
   description: A lightweight message queue built on Postgres with at-least-once delivery and visibility timeout
   problem: Need a simple, durable message queue?
   category: queues
-  url: https://github.com/tembo-io/pgmq
+  url: https://github.com/pgmq/pgmq
   replaces: [Redis, SQS, RabbitMQ]
   toolType: extension
 
