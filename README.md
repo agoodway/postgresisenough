@@ -2,7 +2,7 @@
 
 A curated directory of PostgreSQL extensions and tools that can replace specialized databases. Before adding Redis, Elasticsearch, Kafka, or MongoDB to your stack, see what Postgres can do.
 
-**Live site:** [postgresisenough.com](https://postgresisenough.com)
+**Live site:** [postgresisenough.dev](https://postgresisenough.dev)
 
 ## Contributing
 
