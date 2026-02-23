@@ -629,6 +629,14 @@
   url: https://github.com/postgresml/pgcat
   toolType: software
 
+- id: pgdog
+  name: PgDog
+  description: Connection pooler, load balancer and database sharder
+  problem: Need connection pooling, read/write load balancing or sharding?
+  category: scaling
+  url: https://github.com/pgdogdev/pgdog
+  toolType: software
+
 - id: spock
   name: Spock
   description: Multi-master replication with conflict resolution
