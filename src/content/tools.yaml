@@ -8,23 +8,12 @@
   replaces: [Redis, SQS, RabbitMQ]
   toolType: extension
 
-- id: pgflow
-  name: pgflow
-  description: Workflow orchestration engine for Supabase built on pgmq with automatic retries and parallelism
-  problem: Need multi-step workflows with retries?
-  category: queues
-  url: https://pgflow.dev
-  repo: https://github.com/pgflow-dev/pgflow
-  replaces: [Temporal, Inngest, n8n]
-  toolType: software
-
 - id: pgflow-elixir
   name: pgflow-elixir
   description: Workflow orchestration engine for Elixir built on pgmq, listen/subscribe with automatic retries and parallelism
   problem: Need multi-step workflows with retries?
   category: queues
-  url: https://pgflow.dev
-  repo: https://github.com/agoodway/pgflow
+  url: https://github.com/agoodway/pgflow
   replaces: [Temporal, Inngest, n8n]
   toolType: software
 
