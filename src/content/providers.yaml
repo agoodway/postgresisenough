@@ -14,6 +14,13 @@
   logo: /logos/supabase.svg
   features: [Auth, Real-time, Storage, Edge Functions, pgvector]
 
+- id: planetscale
+  name: PlanetScale
+  description: PlanetScale for Postgres provides fully-managed, high availability PostgreSQL database clusters built on modern cloud infrastructure
+  url: https://planetscale.com/postgres
+  logo: /logos/planetscale.svg
+  features: [High-availability, High-performance, Multi-cloud]
+
 # Cloud Providers
 - id: aws-rds
   name: AWS RDS
