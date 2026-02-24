@@ -18,6 +18,16 @@
   replaces: [Temporal, Inngest, n8n]
   toolType: software
 
+- id: pgflow-elixir
+  name: pgflow-elixir
+  description: Workflow orchestration engine for Elixir built on pgmq, listen/subscribe with automatic retries and parallelism
+  problem: Need multi-step workflows with retries?
+  category: queues
+  url: https://pgflow.dev
+  repo: https://github.com/agoodway/pgflow
+  replaces: [Temporal, Inngest, n8n]
+  toolType: software
+
 - id: graphile-worker
   name: Graphile Worker
   description: High-performance job queue for Node.js using PostgreSQL SKIP LOCKED
@@ -720,11 +730,28 @@
   url: https://github.com/supabase/dbdev
   toolType: software
 
-# Kubernetes
+# Operations
 - id: cloudnative-pg
   name: CloudNativePG
   description: Kubernetes operator for running PostgreSQL clusters
   problem: Need to run Postgres on Kubernetes?
   category: tooling
   url: https://github.com/cloudnative-pg/cloudnative-pg
+  toolType: software
+
+- id: databasus
+  name: Databasus
+  description: Scheduled PostgreSQL backups (local, remote) with notifications and web UI
+  problem: Need to run back up Postgres?
+  category: tooling
+  url: https://github.com/databasus/databasus
+  toolType: software
+
+# MCP
+- id: postgres-mcp
+  name: postgres-mcp
+  description: MCP server with index tuning, explain plans, health checks, and safe sql execution
+  problem: Need to use PG from AI agents?
+  category: tooling
+  url: https://github.com/crystaldba/postgres-mcp
   toolType: software
