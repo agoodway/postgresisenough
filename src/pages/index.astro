@@ -35,9 +35,9 @@ import Schema from '../components/Schema.astro';
 
       <div class="prose prose-lg max-w-none text-text-muted space-y-6">
         <p>
-          It started with <a href="https://gist.github.com/cpursley/c8fb81fe8a7e5df038158bdfe0f06dbb" target="_blank" rel="noopener noreferrer" class="text-pg-blue underline hover:no-underline">a gist</a> and a lively
-          <a href="https://news.ycombinator.com/item?id=39273954" target="_blank" rel="noopener noreferrer" class="text-[#FF6600] hover:underline">Hacker News thread</a>.
-          The premise was simple: Postgres isn't the best at everything, but it's good enough for most things. In practice, most teams are running too many microservices and databases. It's all premature optimization - more operational overhead, more maintenance burden, more monitoring complexity, higher costs, harder tracing, and longer debugging sessions.
+          It started with <a href="https://gist.github.com/cpursley/c8fb81fe8a7e5df038158bdfe0f06dbb" target="_blank" class="text-pg-blue underline hover:no-underline">a gist</a> and a lively
+          <a href="https://news.ycombinator.com/item?id=39273954" target="_blank" class="text-[#FF6600] hover:underline">Hacker News thread</a>.
+          The premise was simple: Postgres isn't the best at everything, but it's good enough for most things. In practice, most teams are running too many microservices and databases. It's all premature optimization. More operational overhead, more maintenance burden, more monitoring complexity, higher costs, harder tracing, and longer debugging sessions.
         </p>
 
         <h3 class="font-display font-bold text-text text-xl mt-10 mb-4">The Typical Pattern</h3>
@@ -47,7 +47,7 @@ import Schema from '../components/Schema.astro';
           Background jobs? Another Redis, or maybe Sidekiq. Documents with flexible schemas? Default to MongoDB.
           Analytics? Snowflake. Events? Reach for Kafka. Before long, your "simple" application talks to seven
           different data stores and microservices, each with its own deployment, backup strategy, failure modes, and 3 AM pages when they stop talking to each other.
-          Each system adds operational surface area: monitoring, alerting, failover testing, security patching, version upgrades. Plus, don't forget that you'll be maintaining all of it forever.
+          Each system adds operational surface area: monitoring, alerting, failover testing, security patching, version upgrades.
         </p>
 
         <!-- Architecture Comparison Diagram -->
@@ -101,7 +101,17 @@ import Schema from '../components/Schema.astro';
           </div>
         </div>
 
-        <h3 class="font-display font-bold text-text text-xl mt-10 mb-4">Postgres Is Enough</h3>
+        <h3 class="font-display font-bold text-text text-xl mt-10 mb-4">"But Postgres Isn't Webscale™!"</h3>
+
+        <p>
+          We hear this argument all the time. But what percentage of software projects actually ever reach so-called "webscale"? About 0.3%? For your stealth startup or saas, should you really be burning your <a href="https://mattrickard.com/innovation-tokens" target="_blank">innovation tokens</a> on multiple microservices and databases instead of the actual problem at hand?
+        </p>
+
+        <p>
+          Even still, there are plenty of large Postgres deployments (Notion, Netflix, Instagram, etc). If companies serving millions of users trust "boring" technology, your startup can probably handle ten thousand users without a seven-database architecture. Besides, if you ever truly get to webscale and tap out Postgre's capabilities, you can just add the pieces in as needed, when truly needed.
+        </p>
+
+        <h3 class="font-display font-bold text-text text-xl mt-10 mb-4">Maybe Postgres Is Enough</h3>
 
         <p>Before reaching for another database, see if you can accomplish it with what Postgres already offers:</p>
 
@@ -163,17 +173,6 @@ import Schema from '../components/Schema.astro';
             </tbody>
           </table>
         </div>
-
-        <h3 class="font-display font-bold text-text text-xl mt-10 mb-4">"But Specialized Databases Are Better!"</h3>
-
-        <p>
-          Are they? At Google scale, maybe. But are you Google scale? The reality is that
-          most specialized databases use similar underlying algorithms as Postgres extensions. ParadeDB's full-text search uses the same BM25 ranking as Elasticsearch. pgvector uses HNSW indexing like the dedicated vector databases. The performance difference for most applications is negligible while the operational complexity explodes.
-        </p>
-
-        <p>
-          Notion chose Postgres. Netflix runs on Postgres. Even Instagram trusts Postgres. If companies serving millions of users trust "boring" technology, your startup can probably handle ten thousand users without a seven-database architecture.
-        </p>
 
         <h3 class="font-display font-bold text-text text-xl mt-10 mb-4">When You Actually Need Something Else</h3>
 
