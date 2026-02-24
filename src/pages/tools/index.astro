@@ -114,6 +114,43 @@ const toolCount = tools.length;
       let activeCategory = 'all';
       let activeType = 'all';
 
+      function updateURL() {
+        const params = new URLSearchParams();
+        const query = searchInput?.value || '';
+        if (query) params.set('q', query);
+        if (activeCategory !== 'all') params.set('category', activeCategory);
+        if (activeType !== 'all') params.set('type', activeType);
+
+        const url = params.toString()
+          ? `${window.location.pathname}?${params}`
+          : window.location.pathname;
+        history.replaceState(null, '', url);
+      }
+
+      function applyButtonState() {
+        categoryButtons.forEach((b) => {
+          const val = (b as HTMLElement).dataset.categoryFilter || 'all';
+          if (val === activeCategory) {
+            b.classList.remove('bg-gray-100', 'text-text-muted');
+            b.classList.add('bg-pg-blue', 'text-white');
+          } else {
+            b.classList.remove('bg-pg-blue', 'text-white');
+            b.classList.add('bg-gray-100', 'text-text-muted');
+          }
+        });
+
+        typeButtons.forEach((b) => {
+          const val = (b as HTMLElement).dataset.typeFilter || 'all';
+          if (val === activeType) {
+            b.classList.remove('border-gray-300', 'bg-white', 'text-text-muted');
+            b.classList.add('border-pg-blue', 'bg-pg-blue', 'text-white');
+          } else {
+            b.classList.remove('border-pg-blue', 'bg-pg-blue', 'text-white');
+            b.classList.add('border-gray-300', 'bg-white', 'text-text-muted');
+          }
+        });
+      }
+
       function filterTools() {
         const query = searchInput?.value.toLowerCase() || '';
         let count = 0;
@@ -141,39 +178,35 @@ const toolCount = tools.length;
         }
       }
 
-      searchInput?.addEventListener('input', filterTools);
+      // Restore state from URL params
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('q') && searchInput) searchInput.value = params.get('q')!;
+      if (params.has('category')) activeCategory = params.get('category')!;
+      if (params.has('type')) activeType = params.get('type')!;
+
+      applyButtonState();
+      filterTools();
+
+      searchInput?.addEventListener('input', () => {
+        filterTools();
+        updateURL();
+      });
 
       categoryButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
-          const category = (btn as HTMLElement).dataset.categoryFilter || 'all';
-          activeCategory = category;
-
-          // Update active state
-          categoryButtons.forEach((b) => {
-            b.classList.remove('bg-pg-blue', 'text-white');
-            b.classList.add('bg-gray-100', 'text-text-muted');
-          });
-          btn.classList.remove('bg-gray-100', 'text-text-muted');
-          btn.classList.add('bg-pg-blue', 'text-white');
-
+          activeCategory = (btn as HTMLElement).dataset.categoryFilter || 'all';
+          applyButtonState();
           filterTools();
+          updateURL();
         });
       });
 
       typeButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
-          const toolType = (btn as HTMLElement).dataset.typeFilter || 'all';
-          activeType = toolType;
-
-          // Update active state for bordered type buttons
-          typeButtons.forEach((b) => {
-            b.classList.remove('border-pg-blue', 'bg-pg-blue', 'text-white');
-            b.classList.add('border-gray-300', 'bg-white', 'text-text-muted');
-          });
-          btn.classList.remove('border-gray-300', 'bg-white', 'text-text-muted');
-          btn.classList.add('border-pg-blue', 'bg-pg-blue', 'text-white');
-
+          activeType = (btn as HTMLElement).dataset.typeFilter || 'all';
+          applyButtonState();
           filterTools();
+          updateURL();
         });
       });
     }
