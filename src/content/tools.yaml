@@ -736,6 +736,14 @@
   url: https://github.com/databasus/databasus
   toolType: software
 
+- id: portabase
+  name: Portabase
+  description: Self-hosted web UI for managing database backups and restores across multiple engines
+  problem: Need unified backup management?
+  category: tooling
+  url: https://github.com/Portabase/portabase
+  toolType: software
+
 # MCP
 - id: postgres-mcp
   name: postgres-mcp
