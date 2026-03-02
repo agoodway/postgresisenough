@@ -752,3 +752,12 @@
   category: tooling
   url: https://github.com/crystaldba/postgres-mcp
   toolType: software
+
+- id: pgassistant
+  name: PGAssistant
+  description: pgAssistant is an open-source tool designed to help developers understand and optimize PostgreSQL database performance by using AI-powered insights or ... not.
+  problem: Need assistance with postgresql database design and database performance ?
+  category: tuning
+  url: https://github.com/beh74/pgassistant-community
+  toolType: software
+
