@@ -69,6 +69,15 @@
   replaces: [Sidekiq, Celery]
   toolType: software
 
+- id: pgque
+  name: PgQue
+  description: Zero-bloat Postgres queue built on top of on battle-proven Skype's PgQ
+  problem: Need a durable event stream with zero bloat?
+  category: queues
+  url: https://github.com/NikolayS/pgque
+  replaces: [Kafka, Redpanda]
+  toolType: software
+
 # Full-Text Search
 - id: paradedb
   name: ParadeDB
