@@ -71,7 +71,7 @@
 
 - id: pgque
   name: PgQue
-  description: Zero-bloat Postgres queue built on top of on battle-proven Skype's PgQ
+  description: A zero-bloat Postgres queue built on top of Skype's battle-proven PgQ
   problem: Need a durable event stream with zero bloat?
   category: queues
   url: https://github.com/NikolayS/pgque
