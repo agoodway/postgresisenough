@@ -80,9 +80,9 @@
   logo: /logos/digitalocean.svg
   features: [Predictable pricing, Standby nodes, 1TB bandwidth included]
 
-- id: planetscale-alternative
+- id: xata
   name: Xata
-  description: Serverless Postgres with built-in search, file attachments, and a spreadsheet-like UI
+  description: Postgres managed service with fast copy-on-write branching and scale-to-zero
   url: https://xata.io
   logo: /logos/xata.svg
-  features: [Serverless, Built-in search, File attachments, Branching]
+  features: [Serverless, Database branching, Scale-to-zero, Anonymization]
