@@ -168,6 +168,15 @@
   url: https://github.com/pgpartman/pg_partman
   toolType: extension
 
+- id: deltax
+  name: DeltaX
+  description: Time-series extension with columnar compression that stores compressed data in regular Postgres tables
+  problem: Need compressed columnar storage for time-series analytics?
+  category: time-series
+  url: https://github.com/xataio/deltax
+  replaces: [InfluxDB, ClickHouse]
+  toolType: extension
+
 # Caching
 - id: readyset
   name: ReadySet
@@ -760,4 +769,3 @@
   category: tuning
   url: https://github.com/beh74/pgassistant-community
   toolType: software
-
