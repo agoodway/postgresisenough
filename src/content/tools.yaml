@@ -17,6 +17,15 @@
   replaces: [Temporal, Inngest, n8n]
   toolType: software
 
+- id: dbos
+  name: DBOS
+  description: Durable workflow orchestration as a lightweight library, checkpointing workflow and step state in Postgres for automatic crash recovery (Python, TypeScript, Go, Java)
+  problem: Need durable workflows that survive crashes?
+  category: queues
+  url: https://www.dbos.dev
+  replaces: [Temporal, AWS Step Functions, Airflow]
+  toolType: software
+
 - id: graphile-worker
   name: Graphile Worker
   description: High-performance job queue for Node.js using PostgreSQL SKIP LOCKED
