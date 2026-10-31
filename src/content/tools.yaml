@@ -213,6 +213,16 @@
   url: https://github.com/sraoss/pg_ivm
   toolType: extension
 
+  +- id: pgcache
++  name: PgCache
++  description: Wire-compatible Postgres caching proxy kept fresh by logical replication
++  problem: Need a query cache without TTLs or invalidation code?
++  category: caching
++  url: https://www.pgcache.com
++  repo: https://github.com/PgCache/pgcache
++  replaces: [Redis, Memcached, Read replicas]
++  toolType: software
+
 # Document / NoSQL
 - id: ferretdb
   name: FerretDB
