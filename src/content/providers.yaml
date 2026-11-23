@@ -86,3 +86,10 @@
   url: https://xata.io
   logo: /logos/xata.svg
   features: [Serverless, Database branching, Scale-to-zero, Anonymization]
+
+- id: layerbase
+  name: Layerbase
+  description: Managed Postgres with scale-to-zero, copy-on-write branching, and flat monthly plans with no usage meters
+  url: https://layerbase.com/db/postgresql
+  logo: /logos/layerbase.svg
+  features: [Scale-to-zero, Database branching, Flat pricing, pgvector, PostGIS, pg_cron]
