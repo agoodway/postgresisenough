@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://postgresisenough.com',
+  site: 'https://postgresisenough.dev',
   integrations: [sitemap()],
   prefetch: true,
   vite: {
